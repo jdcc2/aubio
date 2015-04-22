@@ -28,7 +28,7 @@
 
 #include "utils2.h"
 #ifdef HAVE_JACK
-#include "jackio.h"
+#include "jackio2.h"
 #endif /* HAVE_JACK */
 
 int verbose = 0;

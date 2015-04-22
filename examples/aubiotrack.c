@@ -22,6 +22,9 @@
 #define PROG_HAS_TEMPO 1
 #define PROG_HAS_OUTPUT 1
 #define PROG_HAS_JACK 1
+#define PROG_HAS_PITCH 1
+#define PROG_HAS_ONSET 1
+
 #include "parse_args.h"
 
 aubio_tempo_t * tempo;
@@ -29,6 +32,7 @@ aubio_wavetable_t *wavetable;
 fvec_t * tempo_out;
 smpl_t is_beat = 0;
 uint_t is_silence = 0.;
+int sentNoteOn=0;
 
 void process_block(fvec_t * ibuf, fvec_t *obuf) {
   aubio_tempo_do (tempo, ibuf, tempo_out);
@@ -39,7 +43,13 @@ void process_block(fvec_t * ibuf, fvec_t *obuf) {
   fvec_zeros (obuf);
   if ( is_beat && !is_silence ) {
     aubio_wavetable_play ( wavetable );
+/*    outmsg("allalal %s", "lal"); */
+    send_noteon(190,8);
+//    sentNoteOn=!sentNoteOn;
+    sentNoteOn=1;
   } else {
+    if (sentNoteOn) send_noteon(190,0);
+    sentNoteOn=0;
     aubio_wavetable_stop ( wavetable );
   }
   if (mix_input)

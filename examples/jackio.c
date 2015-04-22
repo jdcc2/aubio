@@ -328,7 +328,7 @@ aubio_jack_midi_event_write (aubio_jack_t * dev, jack_midi_event_t * event)
 static void
 process_midi_output (aubio_jack_t * dev, jack_nframes_t nframes)
 {
-  int read, sendtime;
+  int read, sendtime, i;
   jack_midi_event_t ev;
   unsigned char *buffer;
   jack_nframes_t last_frame_time = jack_last_frame_time (dev->client);
@@ -372,8 +372,8 @@ process_midi_output (aubio_jack_t * dev, jack_nframes_t nframes)
       AUBIO_WRN ("Call to jack_midi_event_reserve failed, note lost.\n");
       break;
     }
-
     AUBIO_MEMCPY (buffer, ev.buffer, ev.size);
+    break; //Whee, dirty hack, JD
   }
 }
 

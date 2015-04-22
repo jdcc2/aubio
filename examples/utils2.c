@@ -205,7 +205,7 @@ send_noteon (int pitch, int velo)
 void
 send_midi ()
 {
-  smpl_t mpitch = floor (aubio_freqtomidi (pitch) + .5);
+  //smpl_t mpitch = floor (aubio_freqtomidi (pitch) + .5);
 #if HAVE_JACK
   jack_midi_event_t ev;
   ev.size = 3;
@@ -220,12 +220,8 @@ send_midi ()
     ev.buffer[2] = 0x00;
     
     aubio_jack_midi_event_write (jack_setup, (jack_midi_event_t *) & ev);
-  } else
+  } 
 #endif
-  if (velo == 0) {
-    verbmsg ("%f\n", blocks * hop_size / (float) samplerate);
-  } else {
-    verbmsg ("%f\t%f\t", mpitch, blocks * hop_size / (float) samplerate);
-  }
+ 
 }
 

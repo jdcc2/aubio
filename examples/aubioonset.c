@@ -28,6 +28,7 @@ aubio_onset_t *o;
 aubio_wavetable_t *wavetable;
 fvec_t *onset;
 smpl_t is_onset;
+int sentNoteOn=0;
 
 void process_block(fvec_t *ibuf, fvec_t *obuf)
 {

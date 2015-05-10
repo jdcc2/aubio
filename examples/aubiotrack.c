@@ -44,6 +44,7 @@ void process_block(fvec_t * ibuf, fvec_t *obuf) {
   if ( is_beat && !is_silence ) {
     aubio_wavetable_play ( wavetable );
 /*    outmsg("allalal %s", "lal"); */
+    //Send F#3 midi note
     send_noteon(190,8);
 //    sentNoteOn=!sentNoteOn;
     sentNoteOn=1;

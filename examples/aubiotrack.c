@@ -43,13 +43,11 @@ void process_block(fvec_t * ibuf, fvec_t *obuf) {
   fvec_zeros (obuf);
   if ( is_beat && !is_silence ) {
     aubio_wavetable_play ( wavetable );
-/*    outmsg("allalal %s", "lal"); */
-    send_noteon(190,8);
-//    sentNoteOn=!sentNoteOn;
-    sentNoteOn=1;
+    /* Send Program Change MIDI message with program number 2 */
+    
+    send_pc_mid(2);
   } else {
-    if (sentNoteOn) send_noteon(190,0);
-    sentNoteOn=0;
+    
     aubio_wavetable_stop ( wavetable );
   }
   if (mix_input)

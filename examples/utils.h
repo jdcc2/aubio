@@ -50,6 +50,7 @@
 
 typedef void (aubio_print_func_t) (void);
 void send_noteon (int pitch, int velo);
+void send_pc_midi(int pccode);
 
 /** common process function */
 typedef int (*aubio_process_func_t) (fvec_t * input, fvec_t * output);

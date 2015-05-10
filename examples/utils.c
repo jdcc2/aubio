@@ -202,3 +202,32 @@ send_noteon (int pitch, int velo)
   }
 }
 
+/*
+ * Send a MIDI Program Change mesage. 'pccode' is a 7-bit program number (0-127)
+ */
+void send_pc_midi(int pccode) {
+#if HAVE_JACK
+  jack_midi_event_t ev;
+  ev.size = 3;
+  ev.buffer = malloc (3 * sizeof (jack_midi_data_t)); // FIXME
+  ev.time = 0;
+  if (usejack) {
+    /* Third byte is zero in Program Change messages */
+    ev.buffer[2] = 0;
+    /* Program number */
+    ev.buffer[1] = pccode;
+    /* Program Change message for channel 1 -> 11000000 = 0xC0. Second 4 bits are the channel number */
+    ev.buffer[0] = 0xC0;
+    aubio_jack_midi_event_write (jack_setup, (jack_midi_event_t *) & ev);
+  } else
+#endif
+  /*	  
+  if (velo == 0) {
+    verbmsg ("%f\n", blocks * hop_size / (float) samplerate);
+  } else {
+    verbmsg ("%f\t%f\t", mpitch, blocks * hop_size / (float) samplerate);
+  }
+  */
+}
+}
+

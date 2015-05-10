@@ -38,14 +38,10 @@ void process_block(fvec_t *ibuf, fvec_t *obuf)
   fvec_zeros(obuf);
   if ( is_onset ) {
     aubio_wavetable_play ( wavetable );
-    //Send a midi note on on audio onset event
-    send_noteon(190,8);
-    //Set a boolean to remember if a note off should follow
-    sentNoteOn=1;
+    /* Send MIDI Program Change message with program number 3 */
+    send_pc_midi(2);
   } else {
-	//Prevent too many note offs by checking the boolean sentNoteOn  
-    if (sentNoteOn) send_noteon(190,0);
-    sentNoteOn=0;  
+	
     aubio_wavetable_stop ( wavetable );
   }
   if (mix_input)

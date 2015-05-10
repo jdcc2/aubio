@@ -43,9 +43,9 @@ void process_block(fvec_t * ibuf, fvec_t *obuf) {
   fvec_zeros (obuf);
   if ( is_beat && !is_silence ) {
     aubio_wavetable_play ( wavetable );
-    /* Send Program Change MIDI message with program number 2 */
+    /* Send Program Change MIDI message with program number 1 */
     
-    send_pc_mid(2);
+    send_pc_midi(1);
   } else {
     
     aubio_wavetable_stop ( wavetable );

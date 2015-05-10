@@ -38,7 +38,7 @@ void process_block(fvec_t *ibuf, fvec_t *obuf)
   fvec_zeros(obuf);
   if ( is_onset ) {
     aubio_wavetable_play ( wavetable );
-    /* Send MIDI Program Change message with program number 3 */
+    /* Send MIDI Program Change message with program number 2 */
     send_pc_midi(2);
   } else {
 	

@@ -219,15 +219,10 @@ void send_pc_midi(int pccode) {
     /* Program Change message for channel 1 -> 11000000 = 0xC0. Second 4 bits are the channel number */
     ev.buffer[0] = 0xC0;
     aubio_jack_midi_event_write (jack_setup, (jack_midi_event_t *) & ev);
-  } else
+  } 
 #endif
-  /*	  
-  if (velo == 0) {
-    verbmsg ("%f\n", blocks * hop_size / (float) samplerate);
-  } else {
-    verbmsg ("%f\t%f\t", mpitch, blocks * hop_size / (float) samplerate);
-  }
-  */
-}
+  	  
+	 
+
 }
 
